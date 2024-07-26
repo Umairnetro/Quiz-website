@@ -189,7 +189,6 @@ if (questionElement) {
 
   const AnswerSelected = (ans) => {
     let selectBtn = ans.target;
-    console.log(selectBtn);
     if (selectBtn.dataset.correct) {
       alert("Correct!");
       score++;
@@ -214,7 +213,7 @@ if (questionElement) {
       questionElement.classList.add("active");
       options.classList.add("active");
       document.querySelector(".dashboard-btn").addEventListener("click", () => {
-        window.location.href = "../index.html";
+        window.location.replace("../index.html");
       });
     }
   };
