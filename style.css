@@ -17,12 +17,14 @@
 .navbar {
   width: 100%;
   position: absolute;
-  padding: 16px 30px;
+  padding: 30px 40px;
 }
 
 .navbar #logo {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  font-weight: 900;
+  color: #aadfb7;
 }
 
 .navbar #logo .white {
@@ -206,12 +208,41 @@ label {
   color: var(--primary-color);
   font-size: 1.1rem;
   border-radius: 6px;
-  cursor:pointer;
+  cursor: pointer;
   margin: 6px 0px;
-  transition: all var(--transition)
+  transition: all var(--transition);
 }
 
-.options:hover{
+.options:hover {
   background-color: var(--primary-color);
-  color:var(--secondary-color)
+  color: var(--secondary-color);
+}
+
+.result {
+  text-align: center;
+}
+
+.result #score {
+  border: 3px solid var(--primary-color);
+  height: 200px;
+  width: 200px;
+  font-size: 2.6rem;
+  margin: auto;
+  border-radius:50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.dashboard-btn {
+  padding: 10px 18px;
+  font-weight: 500;
+  border: 2px solid var(--primary-color);
+  background: var(--primary-color);
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-top: 20px;
 }

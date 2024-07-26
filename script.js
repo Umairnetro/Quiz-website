@@ -74,15 +74,95 @@ if (startBtn) {
 // Quiz
 const questions = [
   {
-    question: "What is the capital of France?",
+    question: "Which language is primarily used for web development?",
     answers: [
-      { text: "Paris", correct: true },
-      { text: "London", correct: false },
-      { text: "Rome", correct: false },
-      { text: "Berlin", correct: false },
+      { text: "Python", correct: false },
+      { text: "JavaScript", correct: true },
+      { text: "C++", correct: false },
+      { text: "Java", correct: false },
     ],
   },
-  // Add more questions as needed
+  {
+    question: "What is the largest planet in our solar system?",
+    answers: [
+      { text: "Earth", correct: false },
+      { text: "Jupiter", correct: true },
+      { text: "Saturn", correct: false },
+      { text: "Mars", correct: false },
+    ],
+  },
+  {
+    question: "Who painted the Mona Lisa?",
+    answers: [
+      { text: "Vincent van Gogh", correct: false },
+      { text: "Leonardo da Vinci", correct: true },
+      { text: "Pablo Picasso", correct: false },
+      { text: "Claude Monet", correct: false },
+    ],
+  },
+  {
+    question: "What is the chemical symbol for gold?",
+    answers: [
+      { text: "Au", correct: true },
+      { text: "Ag", correct: false },
+      { text: "Pb", correct: false },
+      { text: "Pt", correct: false },
+    ],
+  },
+  {
+    question: "What is the square root of 64?",
+    answers: [
+      { text: "6", correct: false },
+      { text: "7", correct: false },
+      { text: "8", correct: true },
+      { text: "9", correct: false },
+    ],
+  },
+  {
+    question: "Who wrote 'Pride and Prejudice'?",
+    answers: [
+      { text: "Charlotte Brontë", correct: false },
+      { text: "Mark Twain", correct: false },
+      { text: "Jane Austen", correct: true },
+      { text: "Charles Dickens", correct: false },
+    ],
+  },
+  {
+    question: "In which year did the Titanic sink?",
+    answers: [
+      { text: "1905", correct: false },
+      { text: "1912", correct: true },
+      { text: "1918", correct: false },
+      { text: "1923", correct: false },
+    ],
+  },
+  {
+    question: "What is the longest river in the world?",
+    answers: [
+      { text: "Amazon River", correct: false },
+      { text: "Nile River", correct: true },
+      { text: "Yangtze River", correct: false },
+      { text: "Mississippi River", correct: false },
+    ],
+  },
+  {
+    question: "Which element is represented by the symbol 'O'?",
+    answers: [
+      { text: "Oxygen", correct: true },
+      { text: "Osmium", correct: false },
+      { text: "Oganesson", correct: false },
+      { text: "Oxygenium", correct: false },
+    ],
+  },
+  {
+    question: "Who is the author of the Harry Potter series?",
+    answers: [
+      { text: "J.R.R. Tolkien", correct: false },
+      { text: "George R.R. Martin", correct: false },
+      { text: "J.K. Rowling", correct: true },
+      { text: "Stephen King", correct: false },
+    ],
+  },
 ];
 
 const questionElement = document.querySelector("#question");
@@ -91,21 +171,53 @@ const options = document.querySelector("ul");
 let currentQuestionIndex = 0;
 let score = 0;
 
-console.log(questionElement, options);
+if (questionElement) {
+  const showQuestion = (question) => {
+    questionElement.innerHTML = question.question;
+    options.innerHTML = "";
+    question.answers.forEach((opt) => {
+      let button = document.createElement("button");
+      button.classList.add("options");
+      if (opt.correct) {
+        button.dataset.correct = true;
+      }
+      button.innerHTML = opt.text;
+      button.addEventListener("click", AnswerSelected);
+      options.appendChild(button);
+    });
+  };
 
-const showQuestion = (question) => {
-  questionElement.innerHTML = question.question;
-  question.answers.forEach((opt) => {
-    let button = document.createElement("button");
-    button.classList.add("options");
-    button.innerHTML = opt.text;
-    button.addEventListener("click", AnswerSelected);
-    options.appendChild(button);
-  });
-};
+  const AnswerSelected = (ans) => {
+    let selectBtn = ans.target;
+    console.log(selectBtn);
+    if (selectBtn.dataset.correct) {
+      alert("Correct!");
+      score++;
+    } else {
+      const correntAnswer = questions[currentQuestionIndex].answers.find(
+        (answer) => {
+          return answer.correct;
+        }
+      );
+      console.log(correntAnswer);
+      alert(`Wrong the right answer is ${correntAnswer.text}`);
+    }
 
-const AnswerSelected = (ans) => {
-  console.log("me");
-};
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+      showQuestion(questions[currentQuestionIndex]);
+    } else {
+      let result = document.querySelector(".result");
+      let displayScore = document.querySelector("#score");
+      displayScore.innerHTML = `${score}/${questions.length}`;
+      result.classList.remove("active");
+      questionElement.classList.add("active");
+      options.classList.add("active");
+      document.querySelector(".dashboard-btn").addEventListener("click", () => {
+        window.location.href = "../index.html";
+      });
+    }
+  };
 
-showQuestion(questions[0]);
+  showQuestion(questions[0]);
+}
